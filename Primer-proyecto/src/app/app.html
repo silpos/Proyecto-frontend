@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">{{ title() }}</a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/productos" routerLinkActive="active">Productos</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container pb-5">
+  <router-outlet />
+</main>
