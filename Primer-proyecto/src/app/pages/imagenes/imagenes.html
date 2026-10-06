@@ -1,0 +1,61 @@
+<div class="container py-4">
+  <a routerLink="/" class="d-inline-block mb-3">← Volver a la tienda</a>
+
+  <h1 class="h3">Imágenes de los productos</h1>
+  <p class="text-muted">
+    Elige una imagen para cada producto. Se guarda en Cloudinary y la URL queda en el producto,
+    así el Home la muestra en su card.
+  </p>
+
+  @if (error()) {
+    <div class="alert alert-danger alert-dismissible">
+      {{ error() }}
+      <button type="button" class="btn-close" (click)="error.set(null)"></button>
+    </div>
+  }
+  @if (mensaje()) {
+    <div class="alert alert-success alert-dismissible">
+      {{ mensaje() }}
+      <button type="button" class="btn-close" (click)="mensaje.set(null)"></button>
+    </div>
+  }
+
+  @if (cargando()) {
+    <p class="text-muted">Cargando productos…</p>
+  } @else {
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>Imagen actual</th>
+            <th>Producto</th>
+            <th>Cambiar imagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of productos(); track p.id) {
+            <tr>
+              <td style="width: 120px">
+                @if (p.imagenUrl) {
+                  <img [src]="p.imagenUrl" [alt]="p.nombre" class="img-thumbnail" style="height: 80px; width: 100px; object-fit: cover">
+                } @else {
+                  <span class="badge text-bg-secondary">Sin imagen</span>
+                }
+              </td>
+              <td>{{ p.nombre }}</td>
+              <td>
+                @if (subiendoId() === p.id) {
+                  <span class="text-primary">Subiendo a Cloudinary…</span>
+                } @else {
+                  <input type="file" class="form-control form-control-sm" accept="image/*" [attr.aria-label]="'Imagen de ' + p.nombre" (change)="cambiarImagen(p, $event)">
+                }
+              </td>
+            </tr>
+          } @empty {
+            <tr><td colspan="3" class="text-center text-muted">No hay productos registrados.</td></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

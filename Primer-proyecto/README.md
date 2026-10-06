@@ -12,6 +12,7 @@ Frontend en Angular que consume la API del Taller 2 (`Ecommerce_API`).
 | `/login`          | Login          | Solo visual: correo, contraseña, "Iniciar sesión" y enlace a Registro |
 | `/registro`       | Registro       | Solo visual: nombre, correo, contraseña, confirmación y "Registrarse" |
 | `/crear_producto` | Crear producto | Formulario del Taller 2, ahora con campo de imagen |
+| `/imagenes`       | Imágenes       | Lista los productos y permite subir o cambiar la imagen de cada uno (PUT a la API → Cloudinary) |
 
 Navegación: **Home** → (clic en 👤) → **Login** → (clic en "Regístrate") → **Registro**.
 
@@ -22,7 +23,19 @@ Producto → Imagen → Cloudinary → URL de imagen → API → Frontend
 1. En **Crear producto** se elige una imagen; el frontend la convierte a Base64 (`FileReader`).
 2. Se envía a la API en el campo `imagenBase64`.
 3. La API la sube a Cloudinary y guarda en la base de datos solo la URL (`imagenUrl`).
+   Para productos que ya existían se usa la vista **Imágenes**, que hace lo mismo con un `PUT`.
 4. El Home recibe `imagenUrl` en cada producto y la muestra en la card.
+
+### Checklist de entrega (punto 9 del taller)
+
+1. Al iniciar el proyecto se muestra directamente el Home → ruta `''` en `app.routes.ts`.
+2. El Home muestra los productos obtenidos desde la API del Taller 2 → `getProductos()` en `ProductoServices`.
+3. Cada producto se presenta mediante una card → `@for` en `pages/home/home.html`.
+4. Cada producto tiene su respectiva imagen → se asigna en **Crear producto** o en **Imágenes**.
+5. Las imágenes utilizan Cloudinary → la card muestra `imagenUrl` (URL de Cloudinary que guarda la API).
+6. Al seleccionar el usuario (👤) se navega hacia Login.
+7. Desde Login se puede acceder a Registro ("¿No tienes una cuenta? Regístrate").
+8. Login y Registro funcionan únicamente como vistas y navegación.
 
 ### Cómo ejecutarlo
 
