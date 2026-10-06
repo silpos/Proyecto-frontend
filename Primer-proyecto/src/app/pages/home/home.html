@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Administración de Productos</h1>
+  <p>Este es el contenido principal de la página de inicio.</p>
+
+  <div class="table-responsive">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">nombre</th>
+      <th scope="col">descripción</th>
+      <th scope="col">precio</th>
+      <th scope="col">stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (cargando()) {
+      <tr><td colspan="5" class="text-center text-muted">Cargando productos…</td></tr>
+    } @else if (error()) {
+      <tr><td colspan="5" class="text-center text-danger">No se pudieron cargar los productos. ¿Está corriendo la API?</td></tr>
+    } @else {
+      @for (p of productos(); track p.id) {
+        <tr>
+          <th scope="row">{{ p.id }}</th>
+          <td>{{ p.nombre }}</td>
+          <td>{{ p.descripcion }}</td>
+          <td>{{ p.precio | currency: 'COP' : 'symbol-narrow' : '1.0-2' }}</td>
+          <td>{{ p.stock }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="5" class="text-center text-muted">No hay productos registrados.</td></tr>
+      }
+    }
+  </tbody>
+</table>
+  </div>
+
+</div>

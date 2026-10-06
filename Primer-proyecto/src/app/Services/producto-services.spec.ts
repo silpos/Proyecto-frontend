@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+﻿import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProductoServices } from './producto-services';
@@ -27,7 +27,7 @@ describe('ProductoServices', () => {
     let recibido: Producto[] = [];
     service.getProductos().subscribe((p) => (recibido = p));
 
-    const req = http.expectOne('/api/producto');
+    const req = http.expectOne('http://localhost:5094/api/producto');
     expect(req.request.method).toBe('GET');
     req.flush(datos);
     expect(recibido).toEqual(datos);
@@ -35,14 +35,14 @@ describe('ProductoServices', () => {
 
   it('actualiza con PUT /api/producto/{id}', () => {
     service.updateProducto(7, { nombre: 'Teclado', descripcion: null, precio: 1, stock: 1 }).subscribe();
-    const req = http.expectOne('/api/producto/7');
+    const req = http.expectOne('http://localhost:5094/api/producto/7');
     expect(req.request.method).toBe('PUT');
     req.flush({});
   });
 
   it('elimina con DELETE /api/producto/{id}', () => {
     service.deleteProducto(7).subscribe();
-    const req = http.expectOne('/api/producto/7');
+    const req = http.expectOne('http://localhost:5094/api/producto/7');
     expect(req.request.method).toBe('DELETE');
     req.flush({ mensaje: 'ok' });
   });

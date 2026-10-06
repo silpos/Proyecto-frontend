@@ -3,7 +3,10 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "83740b7d-0e5e-4dd8-82d5-d6fb577698a4"
+    "analytics": "83740b7d-0e5e-4dd8-82d5-d6fb577698a4",
+    "cache": {
+      "path": "C:/Users/silpo/.angular-cache/Primer-proyecto"
+    }
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -67,9 +70,6 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
-          "options": {
-            "proxyConfig": "proxy.conf.json"
-          },
           "configurations": {
             "production": {
               "buildTarget": "Primer-proyecto:build:production"

@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    @if (error()) {
+      <div class="alert alert-danger alert-dismissible">
+        {{ error() }}
+        <button type="button" class="btn-close" (click)="error.set(null)"></button>
+      </div>
+    }
+    @if (mensaje()) {
+      <div class="alert alert-success alert-dismissible">
+        {{ mensaje() }}
+        <button type="button" class="btn-close" (click)="mensaje.set(null)"></button>
+      </div>
+    }
+
+    <div class="card shadow-sm">
+      <div class="card-header fw-semibold">formulario producto</div>
+
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Portátil" formControlName="nombre" [class.is-invalid]="invalido('nombre')">
+            <div class="invalid-feedback">El nombre es obligatorio (máx. 150 caracteres).</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <input type="text" class="form-control" id="descripcion" placeholder="Para trabajo y estudio" formControlName="descripcion" [class.is-invalid]="invalido('descripcion')">
+            <div class="invalid-feedback">Máximo 500 caracteres.</div>
+          </div>
+          <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="precio" placeholder="2500000" min="0" step="0.01" formControlName="precio" [class.is-invalid]="invalido('precio')">
+            <div class="invalid-feedback">Debe ser 0 o mayor.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="stock" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="stock" placeholder="10" min="0" step="1" formControlName="stock" [class.is-invalid]="invalido('stock')">
+            <div class="invalid-feedback">Debe ser 0 o mayor.</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="guardando()">
+            {{ guardando() ? 'Guardando…' : 'Crear Producto' }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

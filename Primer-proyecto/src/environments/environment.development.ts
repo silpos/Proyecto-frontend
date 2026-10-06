@@ -1,4 +1,4 @@
 export const environment = {
-  // Ruta relativa: proxy.conf.json la redirige hacia la API (http://localhost:5094)
-  apiUrl: '/api',
+  // La API permite este frontend con la politica CORS "AngularPolicy" (ver Program.cs)
+  apiUrl: 'http://localhost:5094/api',
 };
