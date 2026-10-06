@@ -1,0 +1,15 @@
+/* Ancho del buscador de la barra de navegacion */
+.buscador {
+  max-width: 300px;
+}
+
+/* Fondo del banner principal (degradado de colores) */
+.banner {
+  background: linear-gradient(135deg, #0d6efd, #6f42c1);
+}
+
+/* Todas las imagenes de las cards con la misma altura, recortadas sin deformarse */
+.imagen-producto {
+  height: 200px;
+  object-fit: cover;
+}
