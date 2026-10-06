@@ -23,7 +23,7 @@ describe('ProductoServices', () => {
   });
 
   it('lista los productos con GET /api/producto', () => {
-    const datos: Producto[] = [{ id: 1, nombre: 'Mouse', descripcion: null, precio: 50000, stock: 3 }];
+    const datos: Producto[] = [{ id: 1, nombre: 'Mouse', descripcion: null, precio: 50000, stock: 3, imagenUrl: null }];
     let recibido: Producto[] = [];
     service.getProductos().subscribe((p) => (recibido = p));
 
