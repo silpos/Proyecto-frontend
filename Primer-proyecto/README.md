@@ -1,5 +1,37 @@
 # PrimerProyecto
 
+## Taller 3 - Inicio del e-commerce (Home, Login y Registro)
+
+Frontend en Angular que consume la API del Taller 2 (`Ecommerce_API`).
+
+### Vistas
+
+| Ruta              | Vista          | Qué hace |
+|-------------------|----------------|----------|
+| `/`               | Home           | Primera vista. Barra con logo, menú, buscador y botón de usuario; banner; cards con los productos de la API |
+| `/login`          | Login          | Solo visual: correo, contraseña, "Iniciar sesión" y enlace a Registro |
+| `/registro`       | Registro       | Solo visual: nombre, correo, contraseña, confirmación y "Registrarse" |
+| `/crear_producto` | Crear producto | Formulario del Taller 2, ahora con campo de imagen |
+
+Navegación: **Home** → (clic en 👤) → **Login** → (clic en "Regístrate") → **Registro**.
+
+### Imágenes con Cloudinary
+
+Producto → Imagen → Cloudinary → URL de imagen → API → Frontend
+
+1. En **Crear producto** se elige una imagen; el frontend la convierte a Base64 (`FileReader`).
+2. Se envía a la API en el campo `imagenBase64`.
+3. La API la sube a Cloudinary y guarda en la base de datos solo la URL (`imagenUrl`).
+4. El Home recibe `imagenUrl` en cada producto y la muestra en la card.
+
+### Cómo ejecutarlo
+
+1. Iniciar la API (`dotnet run --project EcommerceApi`), que queda en `http://localhost:5094`.
+2. En esta carpeta: `npm install` y luego `ng serve`.
+3. Abrir `http://localhost:4200/`: se muestra directamente el Home.
+
+---
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
 
 ## Development server
