@@ -1,0 +1,29 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+  <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px">
+    <!-- Nombre de la tienda: vuelve al Home -->
+    <a routerLink="/" class="text-decoration-none text-dark text-center">
+      <h2 class="fw-bold">🛒 MiTienda</h2>
+    </a>
+    <p class="text-center text-muted mb-4">Inicia sesión en tu cuenta</p>
+
+    <form>
+      <div class="mb-3">
+        <label for="correo" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="correo" placeholder="correo@ejemplo.com">
+      </div>
+
+      <div class="mb-3">
+        <label for="contrasena" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="contrasena" placeholder="••••••••">
+      </div>
+
+      <!-- type="button": el boton no envia nada todavia (el login no es funcional en este taller) -->
+      <button type="button" class="btn btn-primary w-100">Iniciar sesión</button>
+    </form>
+
+    <!-- Navegacion Login → Registro -->
+    <p class="text-center mt-3 mb-0">
+      ¿No tienes una cuenta? <a routerLink="/registro">Regístrate</a>
+    </p>
+  </div>
+</div>
