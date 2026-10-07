@@ -12,7 +12,7 @@ describe('Home', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Home],
-      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([{ path: '**', children: [] }])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Home);
@@ -43,10 +43,12 @@ describe('Home', () => {
     expect(cards[1].textContent).toContain('Agotado');
   });
 
-  it('el icono de usuario lleva a /login', () => {
+  it('Cerrar sesion borra el token', () => {
+    localStorage.setItem('token', 'abc');
     fixture.detectChanges();
     http.expectOne('http://localhost:5094/api/producto').flush([]);
-    const usuario = (fixture.nativeElement as HTMLElement).querySelector('a[title="Iniciar sesión"]');
-    expect(usuario?.getAttribute('href')).toBe('/login');
+    const boton = Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button')).find((b) => b.textContent?.includes('Cerrar sesión'));
+    boton!.click();
+    expect(localStorage.getItem('token')).toBeNull();
   });
 });

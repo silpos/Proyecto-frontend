@@ -1,7 +1,8 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProductoServices } from '../../Services/producto-services';
+import { AuthService } from '../../Services/auth-service';
 import { Producto } from '../../Models/producto';
 
 @Component({
@@ -12,6 +13,11 @@ import { Producto } from '../../Models/producto';
 })
 export class Home implements OnInit {
   private productoServices = inject(ProductoServices);
+  private authService = inject(AuthService);
+  private navigator = inject(Router);
+
+  // Nombre del usuario que inicio sesion (viene dentro del token)
+  protected readonly nombreUsuario = this.authService.GetNombre();
 
   protected readonly productos = signal<Producto[]>([]);
   protected readonly cargando = signal(true);
@@ -43,6 +49,12 @@ export class Home implements OnInit {
         this.cargando.set(false);
       },
     });
+  }
+
+  // Logout: borra el token y vuelve al Login
+  cerrarSesion(): void {
+    this.authService.Logout();
+    this.navigator.navigate(['/login']);
   }
 
   // Se ejecuta cada vez que el usuario escribe en el buscador

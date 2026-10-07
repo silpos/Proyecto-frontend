@@ -1,10 +1,10 @@
 <!-- 1. Barra de navegacion: logo, menu, buscador y acceso al usuario -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/">🛒 MiTienda</a>
+    <a class="navbar-brand fw-bold" routerLink="/home">🛒 MiTienda</a>
 
     <ul class="navbar-nav me-auto">
-      <li class="nav-item"><a class="nav-link active" routerLink="/">Inicio</a></li>
+      <li class="nav-item"><a class="nav-link active" routerLink="/home">Inicio</a></li>
       <li class="nav-item"><a class="nav-link" href="#productos">Productos</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="/crear_producto">Crear producto</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="/imagenes">Imágenes</a></li>
@@ -13,8 +13,9 @@
     <!-- Buscador: filtra las cards por nombre mientras se escribe -->
     <input type="search" class="form-control me-3 buscador" placeholder="Buscar productos..." (input)="buscar($event)">
 
-    <!-- Acceso al usuario: lleva a la vista de Login -->
-    <a routerLink="/login" class="btn btn-outline-light" title="Iniciar sesión">👤</a>
+    <!-- Usuario con sesion abierta y boton para cerrarla (Logout) -->
+    <span class="text-white me-3 text-nowrap">👤 {{ nombreUsuario }}</span>
+    <button type="button" class="btn btn-outline-light text-nowrap" (click)="cerrarSesion()">Cerrar sesión</button>
   </div>
 </nav>
 

@@ -66,7 +66,7 @@ export class Imagenes implements OnInit {
           input.value = '';
         },
         error: (e) => {
-          this.error.set(e.error?.mensaje ?? 'No se pudo subir la imagen.');
+          this.error.set(e.status === 401 ? 'Tu sesión expiró. Cierra sesión y vuelve a ingresar.' : (e.error?.mensaje ?? 'No se pudo subir la imagen.'));
           this.subiendoId.set(null);
           input.value = '';
         },
