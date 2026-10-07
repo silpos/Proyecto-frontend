@@ -1,24 +1,30 @@
 <div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
   <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px">
-    <!-- Nombre de la tienda: vuelve al Home -->
-    <a routerLink="/" class="text-decoration-none text-dark text-center">
-      <h2 class="fw-bold">🛒 MiTienda</h2>
-    </a>
+    <h2 class="fw-bold text-center">🛒 MiTienda</h2>
     <p class="text-center text-muted mb-4">Inicia sesión en tu cuenta</p>
 
-    <form>
+    @if (registrado) {
+      <div class="alert alert-success py-2">Cuenta creada. Ahora inicia sesión.</div>
+    }
+    @if (error()) {
+      <div class="alert alert-danger py-2">{{ error() }}</div>
+    }
+
+    <!-- (ngSubmit): al pulsar el boton se llama a Login() -->
+    <form (ngSubmit)="Login()">
       <div class="mb-3">
         <label for="correo" class="form-label">Correo electrónico</label>
-        <input type="email" class="form-control" id="correo" placeholder="correo@ejemplo.com">
+        <input type="email" class="form-control" id="correo" name="email" placeholder="correo@ejemplo.com" required [(ngModel)]="loginModel.email">
       </div>
 
       <div class="mb-3">
         <label for="contrasena" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="contrasena" placeholder="••••••••">
+        <input type="password" class="form-control" id="contrasena" name="password" placeholder="••••••••" required [(ngModel)]="loginModel.password">
       </div>
 
-      <!-- type="button": el boton no envia nada todavia (el login no es funcional en este taller) -->
-      <button type="button" class="btn btn-primary w-100">Iniciar sesión</button>
+      <button type="submit" class="btn btn-primary w-100" [disabled]="cargando()">
+        {{ cargando() ? 'Ingresando…' : 'Iniciar sesión' }}
+      </button>
     </form>
 
     <!-- Navegacion Login → Registro -->

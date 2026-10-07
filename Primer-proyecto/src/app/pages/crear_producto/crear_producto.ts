@@ -95,6 +95,7 @@ export class CrearProducto {
   // La API devuelve { mensaje } en los 400/404; status 0 = la API no esta corriendo (o CORS la bloqueo)
   private textoError(e: HttpErrorResponse): string {
     if (e.status === 0) return 'No se pudo conectar con la API (¿está corriendo en http://localhost:5094?).';
+    if (e.status === 401) return 'Tu sesión expiró. Cierra sesión y vuelve a ingresar.';
     return e.error?.mensaje ?? `Error ${e.status}: ${e.statusText}`;
   }
 }

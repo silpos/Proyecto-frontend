@@ -43,6 +43,27 @@ Producto → Imagen → Cloudinary → URL de imagen → API → Frontend
 2. En esta carpeta: `npm install` y luego `ng serve`.
 3. Abrir `http://localhost:4200/`: se muestra directamente el Home.
 
+## Guía 1 - Usuarios, login, registro y JWT
+
+Se conecta con los endpoints `POST /api/Auth/Register` y `POST /api/Auth/Login` de la API.
+
+| Archivo | Qué hace |
+|---|---|
+| `Models/login.ts`, `Models/usuario.ts` | Modelos `Login` (email, password) y `User` (nombre, email, password) |
+| `Services/auth-service.ts` | `Login`, `Register`, `IsLoggedIn`, `GetToken`, `GetNombre` y `Logout` (token en `localStorage`) |
+| `Interceptors/auth-interceptor.ts` | Agrega `Authorization: Bearer <token>` a cada petición |
+| `Guards/auth-guard.ts` | Sin sesión, envía al Login |
+| `pages/login`, `pages/registro` | Formularios funcionales (`[(ngModel)]`) |
+
+Rutas protegidas con `canActivate: [authGuard]`: `/home`, `/crear_producto` e `/imagenes`.
+Rutas públicas: `/login` y `/registro`.
+
+Flujo: **Registro** → (cuenta creada) → **Login** → se guarda el token → **Home** (muestra 👤 nombre y
+**Cerrar sesión**) → **Cerrar sesión** borra el token y vuelve al Login.
+
+> Cambio respecto al Taller 3: como el Home ahora está protegido, al abrir la app sin sesión se
+> muestra el Login, y el botón 👤 del Home se reemplazó por el nombre del usuario y **Cerrar sesión**.
+
 ---
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
